@@ -1,0 +1,11 @@
+version: '3'
+
+services: 
+  taurus:
+    image: blazemeter/taurus
+    volumes: 
+      - ./bzt:/tmp/bzt
+      - ./artifacts:/tmp/artifacts
+    command: 
+      - '/tmp/bzt/test.yml'
+    network_mode: host

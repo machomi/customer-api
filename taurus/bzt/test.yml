@@ -1,0 +1,36 @@
+---
+execution:
+- concurrency: 200
+  ramp-up: 5s
+  hold-for: 30s
+  scenario: list
+
+scenarios:
+  list: 
+    requests:
+      - url: http://localhost:8080/  # url to hit
+        method: GET  # request method (GET, POST, PUT, DELETE)
+        label: customers  # sampler label
+
+  #       body: 'request-body-string'  # if present, will be used as body 
+  #       body:  # generate query string based on parameters and request type
+  #         param1: value1
+  #         param2: value2
+  #       body-file: path/to/file.txt  # this file contents will be used as post body
+
+  #       headers:  # local headers that override global
+  #         Authentication: Token 1234567890
+  #         Referer: http://taurus.blazemeter/docs
+  #       think-time: 1s  # local think-time, overrides global
+  #       timeout: 1s  # local timeout, overrides global
+
+  #       extract-regexp: {}  # explained below
+  #       extract-jsonpath: {}  # explained below
+  #       assert: []  # explained below    
+
+reporting:
+- final-stats
+- console
+- module: junit-xml
+  filename: /tmp/artifacts/junit-report.xml
+  data-source: sample-labels

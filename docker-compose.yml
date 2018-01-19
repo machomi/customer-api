@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+  customers:
+    image: customers
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: customers
+    links:
+      - customers-postgres:db
+    ports:
+       - "8081:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://customers-postgres:5432/customers
+
+  customers-postgres:
+    image: postgres:9.6.5-alpine
+    container_name: customers-postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=customers
